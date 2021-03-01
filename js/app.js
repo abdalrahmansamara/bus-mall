@@ -1,5 +1,5 @@
 'use strict';
-let names = [ 'bag','banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep','scissors','shark','sweep','tauntaun','unicorn','usb','water-can','wine-glass' ];
+let names = [ 'bag.jpg','banana.jpg','bathroom.jpg','boots.jpg','breakfast.jpg','bubblegum.jpg','chair.jpg','cthulhu.jpg','dog-duck.jpg','dragon.jpg','pen.jpg','pet-sweep.jpg','scissors.jpg','shark.jpg','sweep.png','tauntaun.jpg','unicorn.jpg','usb.gif','water-can.jpg','wine-glass.jpg' ];
 let tries = 25, LeftIndex = 0, RightIndex = 0, MiddleIndex = 0, clickcounter = 0, previousImages = [30,30,30];
 const sectionId = document.getElementById ( 'section' );
 const leftImage = document.getElementById ( 'left-image' );
@@ -7,8 +7,8 @@ const rightImage = document.getElementById ( 'right-image' );
 const middleImage = document.getElementById ( 'middle-image' );
 
 function Images ( name ) {
-  this.name = name ;
-  this.image = `./images/${name}.jpg`;
+  this.name = String ( name.split ( '.', 1 ) );
+  this.image = `./images/${name}`;
   this.clicks = 0;
   this.shown = 0;
   Images.all.push( this );
