@@ -84,8 +84,7 @@ sectionId.addEventListener( 'click', clicker );
 assignImage();
 
 const clickedBotton = document.getElementById( 'hide' );
-clickedBotton.addEventListener ( 'click', function (){
-
+clickedBotton.addEventListener ( 'click', function b (){
 
 
   const show = document.getElementById( 'summary' );
@@ -98,11 +97,16 @@ clickedBotton.addEventListener ( 'click', function (){
     liElemelt.textContent = `the ${names[j]} image was shown ${Images.all[j].shown} times, and it was clicked ${Images.all[j].clicks} times`;
   }
   renderChart();
+  clickedBotton.textContent = 'reset';
+  clickedBotton.onclick = function () {
+    location.reload();
+  };
 }
 
 
 
 );
+
 
 function renderChart() {
 
