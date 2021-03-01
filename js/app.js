@@ -89,11 +89,13 @@ clickedBotton.addEventListener ( 'click', function (){
 
 
   const show = document.getElementById( 'summary' );
+  const ulElement = document.createElement ( 'ul' );
+  show.appendChild ( ulElement );
   for ( let j = 0 ; j < Images.all.length ; j++ )
   {
-    const pElement = document.createElement( 'p' );
-    show.appendChild( pElement );
-    pElement.textContent = `the ${names[j]} image was shown ${Images.all[j].shown} times, and it was clicked ${Images.all[j].clicks} times`;
+    const liElemelt = document.createElement( 'li' );
+    ulElement.appendChild( liElemelt );
+    liElemelt.textContent = `the ${names[j]} image was shown ${Images.all[j].shown} times, and it was clicked ${Images.all[j].clicks} times`;
   }
   renderChart();
 }
@@ -130,7 +132,7 @@ function renderChart() {
         {
           label: '# of clicks',
           data: clicksArray,
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          backgroundColor: 'rgba(0, 255, 255, 0.2)',
           borderColor: 'rgba(0, 255, 255, 1)',
           borderWidth: 3
         }

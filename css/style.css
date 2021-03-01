@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-family: comic sans ms;
   }
 header {
     background: #393e46;
@@ -28,7 +29,7 @@ img {
 div{
     width: 30%;
     border-style: dashed;
-    height: 840px;
+    height: 830px;
     border-radius: 10px;
     border-color: chocolate;
     padding: 5px;
@@ -47,8 +48,9 @@ button {
     margin-left: 15px 10px;
     cursor: pointer;
 }
-p {
+li {
     font-size: small;
+    color: rgba(1, 52, 161, 0.904) ;
 }
 footer {
     display: flex;
