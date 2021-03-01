@@ -1,6 +1,6 @@
 'use strict';
 let names = [ 'bag','banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep','scissors','shark','sweep','tauntaun','unicorn','usb','water-can','wine-glass' ];
-let tries = 25, LeftIndex = 0, RightIndex = 0, MiddleIndex = 0, clickcounter = 0;
+let tries = 25, LeftIndex = 0, RightIndex = 0, MiddleIndex = 0, clickcounter = 0, previousImages = [30,30,30];
 const sectionId = document.getElementById ( 'section' );
 const leftImage = document.getElementById ( 'left-image' );
 const rightImage = document.getElementById ( 'right-image' );
@@ -23,13 +23,16 @@ for( let i = 0; i < names.length; i++ )
 
 function assignImage () {
   let leftIndex = randomNumber( 0,Images.all.length - 1 );
+  while ( leftIndex === previousImages[0] || leftIndex === previousImages[1] || leftIndex === previousImages[2] )
+  {
+    leftIndex = randomNumber( 0,Images.all.length - 1 );
+  }
   leftImage.src = Images.all[leftIndex].image;
   leftImage.alt = Images.all[leftIndex].name;
   Images.all[leftIndex].shown++;
 
-
   let rightIndex = randomNumber( 0, Images.all.length - 1 );
-  while ( rightIndex === leftIndex )
+  while ( rightIndex === leftIndex || rightIndex === previousImages[0] || rightIndex === previousImages[1] || rightIndex === previousImages[2] )
   {
     rightIndex = randomNumber( 0, Images.all.length - 1 );
   }
@@ -38,7 +41,7 @@ function assignImage () {
   Images.all[rightIndex].shown++;
 
   let middleIndex = randomNumber( 0, Images.all.length - 1 );
-  while( rightIndex === middleIndex || leftIndex === middleIndex ){
+  while( rightIndex === middleIndex || leftIndex === middleIndex || middleIndex === previousImages[0] || middleIndex === previousImages[1] || middleIndex === previousImages[2] ){
     middleIndex = randomNumber( 0, Images.all.length - 1 );
   }
   middleImage.src = Images.all[middleIndex].image;
@@ -47,6 +50,9 @@ function assignImage () {
   LeftIndex = leftIndex;
   RightIndex = rightIndex;
   MiddleIndex = middleIndex;
+  previousImages[0] = leftIndex;
+  previousImages[1] = rightIndex;
+  previousImages[2] = middleIndex;
 }
 
 
@@ -89,13 +95,58 @@ clickedBotton.addEventListener ( 'click', function (){
     show.appendChild( pElement );
     pElement.textContent = `the ${names[j]} image was shown ${Images.all[j].shown} times, and it was clicked ${Images.all[j].clicks} times`;
   }
+  renderChart();
 }
 
 
 
 );
 
+function renderChart() {
 
+  let nameArray = [];
+  let clicksArray = [];
+  let shownArray = [];
+
+  for ( let i = 0; i < Images.all.length; i++ ) {
+    nameArray.push ( Images.all[i].name );
+    clicksArray.push ( Images.all[i].clicks );
+    shownArray.push ( Images.all[i].shown );
+  }
+
+  let ctx = document.getElementById( 'myChart' ).getContext( '2d' );
+  new Chart( ctx, {
+    type: 'bar',
+    data: {
+      labels: nameArray,
+      datasets: [
+        {
+          label: '# shown',
+          data: shownArray,
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 3
+        },
+        {
+          label: '# of clicks',
+          data: clicksArray,
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(0, 255, 255, 1)',
+          borderWidth: 3
+        }
+      ]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  } );
+}
 
 
 

@@ -13,7 +13,7 @@ header {
   }
 body {
     display: grid;
-    grid-template-rows: 100px 700px 50px;
+    grid-template-rows: 100px 1500px 50px;
 }
 section {
     float: right;
