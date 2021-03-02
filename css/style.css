@@ -54,8 +54,8 @@ li {
 }
 footer {
     display: flex;
-    align-items: center;
+    align-items: center;    /* to allign items based on the vertical axis */
+    justify-content: center;  /* to allign items based on the horizontal axis */
     background: #222831;
     color: #eee;
-    text-align: center;
 }
