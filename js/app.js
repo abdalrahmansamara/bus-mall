@@ -75,6 +75,7 @@ function clicker ( event ) {
   }
   else{
     document.getElementById ( 'hide' ) .style.visibility = 'visible';
+    localStorage.setItem( 'q', JSON.stringify( Images.all ) );
 
   }
 
@@ -97,15 +98,27 @@ clickedBotton.addEventListener ( 'click', function b (){
     liElemelt.textContent = `the ${names[j]} image was shown ${Images.all[j].shown} times, and it was clicked ${Images.all[j].clicks} times`;
   }
   renderChart();
-  clickedBotton.textContent = 'reset';
+  /*   clickedBotton.textContent = 'reset';
   clickedBotton.onclick = function () {
     location.reload();
-  };
+  }; */
+  clickedBotton.removeEventListener ( 'click', b );
 }
-
-
-
 );
+
+function getData() {
+  const data = localStorage.getItem( 'q' );
+  if ( data ) {
+    const objData = JSON.parse( data );
+    Images.all = objData;
+    assignImage();
+  }
+}
+getData();
+
+
+
+
 
 
 function renderChart() {
