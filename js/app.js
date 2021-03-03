@@ -1,6 +1,6 @@
 'use strict';
 let names = [ 'bag.jpg','banana.jpg','bathroom.jpg','boots.jpg','breakfast.jpg','bubblegum.jpg','chair.jpg','cthulhu.jpg','dog-duck.jpg','dragon.jpg','pen.jpg','pet-sweep.jpg','scissors.jpg','shark.jpg','sweep.png','tauntaun.jpg','unicorn.jpg','usb.gif','water-can.jpg','wine-glass.jpg' ];
-let tries = 25, LeftIndex = 0, RightIndex = 0, MiddleIndex = 0, clickcounter = 0, previousImages = [30,30,30];
+let tries = 25 , LeftIndex = 0, RightIndex = 0, MiddleIndex = 0, clickcounter = 0, previousImages = [30,30,30];
 const sectionId = document.getElementById ( 'section' );
 const leftImage = document.getElementById ( 'left-image' );
 const rightImage = document.getElementById ( 'right-image' );
@@ -20,6 +20,11 @@ for( let i = 0; i < names.length; i++ )
   new Images ( names[i] );
 }
 
+const userTries = document.getElementById( 'sub' );
+userTries.addEventListener( 'submit' , function e ( event ) {
+  event.preventDefault();
+  tries = Number( event.target.tries_count.value );
+} );
 
 function assignImage () {
   let leftIndex = randomNumber( 0,Images.all.length - 1 );
@@ -71,11 +76,12 @@ function clicker ( event ) {
       }
       clickcounter++;
       assignImage();
+      localStorage.setItem( 'q', JSON.stringify( Images.all ) );
     }
   }
   else{
     document.getElementById ( 'hide' ) .style.visibility = 'visible';
-    localStorage.setItem( 'q', JSON.stringify( Images.all ) );
+
 
   }
 
